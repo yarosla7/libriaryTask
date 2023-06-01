@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //Необходимо реализовать следующий метод:
@@ -17,6 +18,25 @@ public class Main {
 
     public static final int NUM_SHELVES = 5;
     public static final int MAX_BOOKS_PER_SHELF = 6;
+
+    public static List<List<String>> sortBooks(List<String> books) {
+        Collections.sort(books);
+
+        List<List<String>> shelves = new ArrayList<>();
+
+        for (int i = 0; i < NUM_SHELVES; i++) {
+            int startIndex = i * MAX_BOOKS_PER_SHELF;
+            int endIndex = Math.min((i+1) * MAX_BOOKS_PER_SHELF, books.size());
+
+            List<String> shelf = new ArrayList<>(books.subList(startIndex, endIndex));
+            shelves.add(shelf);
+        }
+
+        for (int i = 0; i < shelves.size(); i ++) {
+            System.out.println("Полка" + (i + 1) + ": " + shelves.get(i));
+        }
+        return shelves;
+    }
 
 
     private static void addBooks(List<String> list) {
@@ -51,5 +71,6 @@ public class Main {
         list.add("И. Шэффер: Голодные игры");
         list.add("Э. Хемингуэй: Старик и море");
         list.add("А. Конан Дойл: Приключения Шерлока Холмса");
+        sortBooks(list);
     }
 }
